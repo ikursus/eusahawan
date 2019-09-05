@@ -23,7 +23,13 @@ class UserController extends Controller
 
     public function simpan(Request $request)
     {
-        $data = $request->except('name');
+        // Validation
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email'
+        ]);
+
+        $data = $request->all();
 
         return $data;
     }
