@@ -18,10 +18,24 @@ class UserController extends Controller
     }
 
     public function create() {
-        return 'Ini adalah halaman borang tambah user baru';
+        return view('users.template_add_user');
+    }
+
+    public function simpan(Request $request)
+    {
+        $data = $request->except('name');
+
+        return $data;
     }
 
     public function edit($id) {
-        return 'Ini adalah halaman borang edit user bernombor ID: ' .$id;
+        return view('users.template_edit_user');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->except('name');
+
+        return $data;
     }
 }

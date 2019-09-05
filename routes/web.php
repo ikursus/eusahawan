@@ -12,8 +12,10 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'UserController@index');
     // Route untuk paparkan borang tambah user
     Route::get('/create', 'UserController@create');
+    Route::post('/create', 'UserController@simpan');
 
     // Route untuk paparkan borang tambah user
     Route::get('/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
+    Route::patch('/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 
 });
