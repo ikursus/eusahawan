@@ -2,20 +2,6 @@
 
 Route::get('/', 'PageController@welcome');
 
-Route::get('hubungi', function () {
-    return view('hubungi');
-});
-
-Route::get('profile/{username?}', function($username = null) {
-
-    // if ($username == null)
-    if(is_null($username))
-    {
-        return 'Tiada rekod username.';
-    }
-    
-    return 'Username profile user ini adalah: ' . $username;
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
