@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $title = 'Projek e-Usahawan RISDA';
+    // return view('welcome', ['title' => $title]);
+    // return view('welcome')->with('title', $title);
+    return view('welcome', compact('title'));
 });
 
 

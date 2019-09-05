@@ -81,7 +81,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <?php echo config('app.name'); ?>
+                    <?php echo $title; ?>
+                    <br>
+                    {{ $title }}
+                    {{-- Comment dalam Laravel --}}
                 </div>
 
                 <p>
