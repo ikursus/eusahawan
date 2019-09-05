@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('kotak_hijau')
 <div class="container">
 <div class="row">
 <div class="col-md-12">
