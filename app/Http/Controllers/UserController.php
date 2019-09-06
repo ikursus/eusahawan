@@ -74,4 +74,11 @@ class UserController extends Controller
         // Redirect ke halaman sebelum
         return redirect()->back()->with('mesej_sukses', 'Rekod berjaya dikemaskini');
     }
+
+    public function hapus($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+
+        return redirect()->back()->with('mesej_sukses', 'Rekod berjaya dihapuskan');
+    }
 }
