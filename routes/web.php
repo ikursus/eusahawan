@@ -7,7 +7,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route untuk paparkan senarai user
-Route::group(['prefix' => 'users'], function () {
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 
     Route::get('/', 'UserController@index');
     // Route untuk paparkan borang tambah user

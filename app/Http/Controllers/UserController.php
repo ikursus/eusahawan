@@ -13,7 +13,8 @@ class UserController extends Controller
         // ->where('email','siti@gmail')
         // ->orWhere('name', 'abu')
         // ->orderBy('id', 'desc')
-        ->get();
+        //->get();
+        ->paginate(3);
     
         return view('users.template_senarai', compact('senarai_users'));
     }
@@ -48,8 +49,13 @@ class UserController extends Controller
         return redirect('users');
     }
 
-    public function edit($id) {
-        return view('users.template_edit_user');
+    public function edit($id)
+    {
+        // Dapatkan data user berdasarkan ID
+        $user = DB::table('users')->where('id', $id)->first();
+
+        // Bagi respon papar template borang edit user beserta rekod $user
+        return view('users.template_edit_user', compact('user'));
     }
 
     public function update(Request $request, $id)

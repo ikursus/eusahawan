@@ -32,6 +32,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $senarai_users->links() }}
 </div>
 </div>
 </div>
