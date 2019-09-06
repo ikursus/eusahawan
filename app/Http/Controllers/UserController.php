@@ -72,6 +72,6 @@ class UserController extends Controller
         // Update data ke dalam table users
         DB::table('users')->where('id', $id)->update($data);
         // Redirect ke halaman sebelum
-        return redirect()->back();
+        return redirect()->back()->with('mesej_sukses', 'Rekod berjaya dikemaskini');
     }
 }

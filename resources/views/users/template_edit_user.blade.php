@@ -9,6 +9,7 @@
                 <div class="card-header">Edit User</div>
 
                 <div class="card-body">
+                @include('layouts.alerts')
                     <form method="POST" action="">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
