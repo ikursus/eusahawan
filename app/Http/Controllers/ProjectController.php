@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
+use App\User;
+use DataTables;
 
 class ProjectController extends Controller
 {
@@ -13,7 +16,29 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = Project::all();
+
+        
+        return view('projects.index', compact('data'));
+    }
+
+    public function datatables()
+    {
+        // $query = Project::select([
+        //     'id',
+        //     'user_id',
+        //     'nama',
+        //     'status'
+        // ]);
+         $query = Project::with('user')
+         ->select([
+            'project.id',
+            'project.pengguna_id',
+            'project.nama',
+            'project.status'
+        ]);
+
+        return DataTables::of($query)->make(true);
     }
 
     /**
@@ -23,7 +48,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $select_users = User::select('id', 'name')->get();
+        return view('projects.create', compact('select_users'));
     }
 
     /**
@@ -34,7 +60,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required|integer',
+            'nama' => 'required|unique:projects,nama'
+        ]);
+
+        $data = $request->all();
+
+        Project::create($data);
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -43,9 +78,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -54,9 +89,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        $select_users = User::select('id', 'name')->get();
+        return view('projects.edit', compact('select_users', 'project'));
     }
 
     /**
@@ -66,9 +102,21 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'user_id' => 'required|integer',
+            'nama' => 'required|unique:projects,nama,' . $project->id
+        ]);
+
+        $data = $request->all();
+
+        //$project = Project::where('id', $id)->where('status', 'active')->first();
+        // $project = Project::find($id);
+
+        $project->update($data);
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -77,8 +125,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 }

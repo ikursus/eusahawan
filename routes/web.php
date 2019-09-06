@@ -21,3 +21,9 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::delete('{id}', 'UserController@hapus');
 
 });
+Route::get('projects/datatables', 'ProjectController@datatables')->name('projects.datatables');
+Route::resource('projects', 'ProjectController');
+
+
+
+
