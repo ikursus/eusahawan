@@ -23,11 +23,11 @@
         <tbody>
             @foreach($senarai_users as $user)
             <tr>
-                <td><?php echo $user['id']; ?></td>
-                <td>{{ $user['name'] }}</td>
-                <td>{{ $user['email'] }}</td>
-                <td>{{ $user['status'] }}</td>
-                <td><a href="/users/{{ $user['id'] }}/edit" class="btn btn-primary">EDIT</a></td>
+                <td><?php echo $user->id; ?></td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->status }}</td>
+                <td><a href="/users/{{ $user->id }}/edit" class="btn btn-primary">EDIT</a></td>
             </tr>
             @endforeach
         </tbody>

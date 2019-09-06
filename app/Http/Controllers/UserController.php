@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class UserController extends Controller
 {
-    public function index() {
-
-        $senarai_users = [
-            ['id' => 1, 'name' => 'Ali', 'email' => 'ali@gmail.com', 'status' => 'active'],
-            ['id' => 2, 'name' => 'Abu', 'email' => 'abu@gmail.com', 'status' => 'banned'],
-            ['id' => 3, 'name' => 'Ah Leong', 'email' => 'ahleong@gmail.com', 'status' => 'active'],
-        ];
+    public function index()
+    {
+        // Query ke table users dan dapatkan SEMUA data
+        $senarai_users = DB::table('users')
+        // ->where('email','siti@gmail')
+        // ->orWhere('name', 'abu')
+        // ->orderBy('id', 'desc')
+        ->get();
     
         return view('users.template_senarai', compact('senarai_users'));
     }
+
+
+
 
     public function create() {
         return view('users.template_add_user');
     }
 
+    
+    
+    
     public function simpan(Request $request)
     {
         // Validation
@@ -30,9 +37,15 @@ class UserController extends Controller
             'password' => 'required|min:5|confirmed'
         ]);
 
-        $data = $request->all();
+        // Kita terima data
+        $data = $request->only(['name', 'email', 'phone', 'status']);
+        // Encrypt password user
+        $data['password'] = bcrypt($request->input('password'));
 
-        return $data;
+        // Simpan data ke dalam database
+        DB::table('users')->insert($data);
+        // Setelah selesai, redirect ke halaman senarai users
+        return redirect('users');
     }
 
     public function edit($id) {
