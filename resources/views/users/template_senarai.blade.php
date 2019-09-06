@@ -10,6 +10,7 @@
     <a href="/users/create" class="btn btn-primary">Tambah User</a>
 </div>
 <div class="card-body">
+@include('layouts.alerts')
     <table class="table table-bordered">
         <thead>
             <tr>
