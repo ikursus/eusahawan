@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <select name="status" class="form-control">
                                     <option value="active" {{ $user->status == 'active' ? 'selected="selected"' : null }}>Active</option>
-                                    <option value="inactive"{{ $user->status == 'inactive' ? 'selected="selected"' : null }}>Inactive</option>
+                                    <option value="inactive" {{ $user->status == 'inactive' ? 'selected="selected"' : null }}>Inactive</option>
                                 </select>
                             </div>
                         </div>
