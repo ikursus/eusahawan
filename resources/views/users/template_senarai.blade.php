@@ -27,7 +27,18 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->status }}</td>
-                <td><a href="/users/{{ $user->id }}/edit" class="btn btn-primary">EDIT</a></td>
+                <td>
+                    <a href="/users/{{ $user->id }}/edit" class="btn btn-primary">EDIT</a>
+                    
+                    <form method="POST" action="/users/{{ $user->id }}">
+                    
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">HAPUS</button>
+
+                    </form>
+
+                </td>
             </tr>
             @endforeach
         </tbody>

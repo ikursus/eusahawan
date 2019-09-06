@@ -18,4 +18,6 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('/{id}/edit', 'UserController@edit')->where(['id' => '[0-9]+']);
     Route::patch('/{id}/edit', 'UserController@update')->where(['id' => '[0-9]+']);
 
+    Route::delete('{id}', 'UserController@hapus');
+
 });
