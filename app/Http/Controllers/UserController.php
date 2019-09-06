@@ -60,8 +60,18 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('name');
+        // Kita terima data
+        $data = $request->only(['name', 'email', 'phone', 'status']);
+        // Semak adakah ruangan password tidak kosong? 
+        // Jika ya, maka update password baru
+        if(!empty($request->input('password')))
+        {
+            $data['password'] = bcrypt($request->input('password'));
+        }
 
-        return $data;
+        // Update data ke dalam table users
+        DB::table('users')->where('id', $id)->update($data);
+        // Redirect ke halaman sebelum
+        return redirect()->back();
     }
 }
